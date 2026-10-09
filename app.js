@@ -24,11 +24,10 @@ click_03.addEventListener('click', function () {      // 클릭 = 인터럽트, 
 
 // 생성자 키워드 선언된 태그 개수 만큼 반복해서 태그명 로그 찍음 
 const items = document.querySelectorAll('button');
-    console.log(items); // 현재 키워드로 생성된 태그 모두 불러오기
-    console.log(items.length);  // 현재 태그 개수 (길이)
-
+    // console.log(items); // 현재 키워드로 생성된 태그 모두 불러오기
+    // console.log(items.length);  // 현재 태그 개수 (길이)
 items.forEach(function (item) {     // item 요소 개수 만큼 반복할거야
-    console.log(item);   // item = 이번 차례의 요소
+    // console.log(item);   // 태그 등록 확인용
     item.addEventListener('click', function (event) {
     console.log(event.target.id);
     });
