@@ -40,7 +40,44 @@ function formatDate(date) {
     const day = String(date.getDate()).padStart(2, '0');
     return `${year}-${month}-${day}`;
 }
-console.log(formatDate(new Date(2026, 0, 5)));
+// console.log(formatDate(new Date(2026, 0, 5)));
 
 const showDate = document.getElementById('now-date') ;
 showDate.textContent = formatDate(new Date());
+
+/* // Console: 문자열 저장과 읽기
+localStorage.setItem('test', 'hello');
+console.log(localStorage.getItem('test'));      // "hello"
+console.log(localStorage.getItem('없는키'));   // null */
+
+/* // Console: 객체 ↔ 문자열 변환
+const a = { date: '2026-10-10', status: 'present' }
+JSON.stringify(a)                 // 따옴표로 감싼 문자열이 나옴
+console.log(JSON.parse(JSON.stringify(a)))     // 다시 펼칠 수 있는 객체가 나옴 */
+
+// app.js: 맨 아래에 추가
+const STORAGE_KEY = 'records';   // 저장 키 이름. 두 함수가 같이 사용
+
+function loadRecords() {
+  const text = localStorage.getItem(STORAGE_KEY);
+  if (text === null) {
+    return [];                  // ① 저장된 것이 없을 때: 빈 배열
+  }
+  return JSON.parse(text);              // ② 문자열을 배열로 되돌리기
+}
+
+function saveRecord(record) {
+  const records = loadRecords();           // ③ 기존 배열 불러오기 (바로 위 함수 호출)
+  records.push(record);          // 배열 끝에 추가
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(records));  // ④ 배열을 문자열로 바꿔 저장
+}
+
+saveRecord({ date: '2026-10-10', status: 'present' })
+// saveRecord({ date: '2026-10-10', status: 'present' })
+loadRecords()     // 항목 1개짜리 배열이 나오면 성공
+
+const saveButton = document.getElementById('save-today');
+saveButton.addEventListener('click', function () {
+  const record = { date: formatDate(new Date()), status: 'present' };  // ⑤ 1-2에서 만든 함수로 오늘 날짜 만들기
+  saveRecord(record);
+});
