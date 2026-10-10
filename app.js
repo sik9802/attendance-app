@@ -7,19 +7,6 @@ const 생성자명 = document.getElementById('태그명'); // 요소 핸들 얻�
   console.log('btn01 클릭됨');
 }); */
 
-// 단일 요소 디버깅(동작시 콘솔에서 로그 찍음)
-/* const click_01 = document.getElementById('btn01'); // 요소 핸들 얻기
-click_01.addEventListener('click', function () {      // 클릭 = 인터럽트, 함수 = 콜백
-  console.log('btn01 클릭됨');
-});
-const click_02 = document.getElementById('btn02'); // 요소 핸들 얻기
-click_02.addEventListener('click', function () {      // 클릭 = 인터럽트, 함수 = 콜백
-  console.log('btn02 클릭됨');
-}); 
-const click_03 = document.getElementById('btn03'); // 요소 핸들 얻기
-click_03.addEventListener('click', function () {      // 클릭 = 인터럽트, 함수 = 콜백
-  console.log('btn03 클릭됨');
-}); */
 
 
 // 생성자 키워드 선언된 태그 개수 만큼 반복해서 태그명 로그 찍음 
@@ -72,12 +59,43 @@ function saveRecord(record) {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(records));  // ④ 배열을 문자열로 바꿔 저장
 }
 
-saveRecord({ date: '2026-10-10', status: 'present' })
 // saveRecord({ date: '2026-10-10', status: 'present' })
-loadRecords()     // 항목 1개짜리 배열이 나오면 성공
+// // saveRecord({ date: '2026-10-10', status: 'present' })
+// loadRecords()     // 항목 1개짜리 배열이 나오면 성공
 
 const saveButton = document.getElementById('save-today');
 saveButton.addEventListener('click', function () {
   const record = { date: formatDate(new Date()), status: 'present' };  // ⑤ 1-2에서 만든 함수로 오늘 날짜 만들기
   saveRecord(record);
+  renderRecords();   
 });
+
+// // Console: 요소 생성 → 내용 채우기 → 화면에 붙이기
+// const li = document.createElement('li');  // 메모리에만 생성됨. 화면에는 아직 안 보임
+// li.textContent = '테스트 항목';
+// document.body.appendChild(li);             // body 끝에 붙여야 화면에 나타남
+
+// // Console: 배열 항목마다 li 하나씩
+// const fruits = ['사과', '배', '감'];
+// fruits.forEach(function (name) {
+//   const item = document.createElement('li');
+//   item.textContent = name;
+//   document.body.appendChild(item);
+// });
+
+  // app.js: saveRecord 함수 아래에 추가
+const recordList = document.getElementById('record-list');
+
+function renderRecords() {
+  recordList.textContent = '';                  // 먼저 비우기 (위에서 설명한 부분)
+  const records = loadRecords();                          // ① 저장된 기록 배열 불러오기
+  records.forEach(function (record) {
+    const item = document.createElement('li');  // ② 목록 항목 태그 이름
+    item.textContent = `${record.date} ${record.status}`;  // record.date = 구조체 멤버 접근과 같음
+    recordList.appendChild(item);                      // ③ 어디에 붙일지
+  });
+}
+
+
+                                           
+renderRecords();   // ④ 저장한 뒤 목록 다시 그리기
