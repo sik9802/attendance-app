@@ -33,3 +33,14 @@ items.forEach(function (item) {     // item 요소 개수 만큼 반복할거야
     });
 });
 
+function formatDate(date) {
+    const year = date.getFullYear();
+    const monthNum = date.getMonth()+1;
+    const month = String(monthNum).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+}
+console.log(formatDate(new Date(2026, 0, 5)));
+
+const showDate = document.getElementById('now-date') ;
+showDate.textContent = formatDate(new Date());

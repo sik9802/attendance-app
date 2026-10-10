@@ -8,8 +8,16 @@
     <title>출결 관리</title>  <!-- 브라우저 탭 이름 -->
     <link rel="stylesheet" href="style.css">
     <script src="app.js" defer></script>
+        <!-- 
+        defer가 없으면 <script> 줄을 만난 순간 HTML 파싱을 멈추고 JS를 실행한다. 
+        defer가 있으면 HTML 파싱을 끝까지 마친 다음에 JS를 실행한다.
+        -->
 </head> <!-- 끝 -->
 <body> <!-- 시작 -->
+    <p id="now-date"></p>
+  <!--   <div id="t_div">의미없는 상자</div>
+    <span id="t_span"></span>
+    <time id="t_time"></time> -->
 
     <!-- 문법: <태그 id="이름표">화면에 보일 글자</태그> -->
     <button id="btn01">NMIXX</button>
@@ -17,5 +25,16 @@
     <button id="btn03">Valentine</button>
     <button id="btn04">ShapeOfLove</button>
     
+
+    
+
 </body> <!-- 끝 -->
 </html>
+
+<!-- 
+태그	성격	용도
+<p>	    블록:   한 줄을 통째로 차지함	문단 하나
+<div>	블록	의미 없는 범용 상자
+<span>	인라인: 글자 흐름 안에 끼어 들어감	문장 일부를 감쌀 때
+<time>	인라인	날짜나 시간을 표시한다는 의미가 있는  태그
+-->
